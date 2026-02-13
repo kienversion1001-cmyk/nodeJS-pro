@@ -1,0 +1,51 @@
+
+import { getConnection } from "config/database";
+
+const handerCreateUser =
+    async (fullname: string,
+        email: string,
+        address: string
+    ) => {
+        // const connection = await getConnection();
+        try {
+
+            const sql = `INSERT INTO Users (name, email, address) VALUES (?, ?, ?);`;
+            const values = [fullname, email, address];
+
+            await getConnection.execute(sql, values);
+        } catch (err) {
+            console.log(err);
+
+        }
+
+    }
+
+const getAllUsers = async () => {
+    // const connection = await getConnection();
+    // A simple SELECT query
+    try {
+
+        const sql = `SELECT * FROM Users ;`;
+        const [results] = await getConnection.execute(sql);
+        return results;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+    // logic get all users from database
+
+}
+
+
+const deleteUserById = async (userId: string) => {
+    const sql = `DELETE FROM Users WHERE id = ?`;
+    const values = [userId];
+
+    await getConnection.execute(sql, values
+    );
+    // return results;
+}
+
+
+
+export { handerCreateUser, getAllUsers, deleteUserById };

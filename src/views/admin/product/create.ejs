@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="laptopshop" />
+    <meta name="author" content="tran kien" />
+    <title>Dashboard -laptopshop </title>
+
+    <link href="/admin/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            const imageFile = $("#imageFile");
+            imageFile.change(function (e) {
+                const imgURL = URL.createObjectURL(e.target.files[0]);
+                $("#imagePreview").attr("src", imgURL);
+                $("#imagePreview").css({ "display": "block" });
+            });
+        });
+    </script>
+
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include('../layout/header'); -%>
+
+
+        <div id="layoutSidenav">
+            <%- include('../layout/sidenav'); -%>
+                <div id="layoutSidenav_content">
+
+                    <main>
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4">Manage products</h1>
+                            <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Users</li>
+                            </ol>
+                            <div class="rows">
+                                <!-- crate form -->
+                                <div class="col-6 mx-auto">
+                                    <div style="width: 600; margin: auto;">
+                                        <% if (errors && errors.length> 0) { %>
+                                            <% errors.forEach(error=> { %>
+                                                <div class="alert alert-danger mb-3">
+                                                    <%= error %>
+                                                </div>
+                                                <% }) %>
+                                                    <% } %>
+
+                                                        <h5>create new user</h5>
+                                                        <form action="/admin/create-product" method="post"
+                                                            enctype="multipart/form-data">
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Name</label>
+                                                                    <input name="name" type="text" class="form-control"
+                                                                        value="<%= oldData ? oldData.name : '' %>"
+                                                                        placeholder="Product name">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Price</label>
+                                                                    <input name="price" type="number"
+                                                                        class="form-control"
+                                                                        value="<%= oldData ? oldData.price : '' %>"
+                                                                        placeholder="Product price">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Detail Description</label>
+                                                                <textarea name="detail_description" class="form-control"
+                                                                    rows="4"
+                                                                    placeholder="Detailed product description"> <%= oldData ? oldData.detail_description : '' %></textarea>
+                                                            </div>
+
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Short Description</label>
+                                                                    <input name="short_description" class="form-control"
+                                                                        type="text"
+                                                                        value="<%= oldData ? oldData.short_description : '' %>"
+                                                                        placeholder="Short product description"></input>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Quantity</label>
+                                                                    <input name="quantity" type="number"
+                                                                        class="form-control"
+                                                                        value="<%= oldData ? oldData.quantity : '' %>"
+                                                                        placeholder="Available quantity">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Factory</label>
+                                                                    <select name="factory" class="form-select">
+                                                                        <option value="APPLE" <%=oldData &&
+                                                                            oldData.factory==="APPLE" ? "selected" : ""
+                                                                            %>>Apple</option>
+                                                                        <option value="ASUS" <%=oldData &&
+                                                                            oldData.factory==="ASUS" ? "selected" : ""
+                                                                            %>>Asus</option>
+                                                                        <option value="LENOVO" <%=oldData &&
+                                                                            oldData.factory==="LENOVO" ? "selected" : ""
+                                                                            %>>Lenovo</option>
+                                                                        <option value="DELL" <%=oldData &&
+                                                                            oldData.factory==="DELL" ? "selected" : ""
+                                                                            %>>Dell</option>
+                                                                        <option value="LG" <%=oldData &&
+                                                                            oldData.factory==="LG" ? "selected" : "" %>
+                                                                            >LG</option>
+                                                                        <option value="ACER" <%=oldData &&
+                                                                            oldData.factory==="ACER" ? "selected" : ""
+                                                                            %>>Acer</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Target</label>
+                                                                    <select name="target" class="form-select">
+                                                                        <option value="GAMING" <%=oldData &&
+                                                                            oldData.target==="GAMING" ? "selected" : ""
+                                                                            %>>Gaming</option>
+                                                                        <option value="OFFICE" <%=oldData &&
+                                                                            oldData.target==="OFFICE"
+                                                                            ? "selected" : "" %>>オフィス
+                                                                        </option>
+                                                                        <option value="GRAPHIC-DESIGN" <%=oldData &&
+                                                                            oldData.target==="GRAPHIC-DESIGN"
+                                                                            ? "selected" : "" %>>グラフィックデザイン
+                                                                        </option>
+                                                                        <option value="LIGHTWEIGHT" <%=oldData &&
+                                                                            oldData.target==="LIGHTWEIGHT" ? "selected"
+                                                                            : "" %>>薄くて軽い</option>
+                                                                        <option value="BUSINESSMAN" <%=oldData &&
+                                                                            oldData.target==="BUSINESSMAN" ? "selected"
+                                                                            : "" %>>ビジネスマン</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Image</label>
+                                                                <input name="image" class="form-control" type="file"
+                                                                    id="imageFile" accept=".png, .jpg, .jpeg">
+                                                            </div>
+                                                            <img style="max-height: 250px; display: none;"
+                                                                alt="image preview" id="imagePreview" />
+
+                                                            <div class="mb-3 ">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary mt-3">Create
+                                                                    Product</button>
+                                                            </div>
+                                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </main>
+
+                    <%- include('../layout/footer'); -%>
+                </div>
+
+        </div>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+        <script src="/admin/js/scripts.js"></script>
+
+
+</body>
+
+</html>

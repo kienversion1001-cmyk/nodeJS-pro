@@ -5,6 +5,33 @@
     "target": "ES2020",
     "sourceMap": true,
     "skipLibCheck": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "src",
+    // "baseUrl": ".",
+    "paths": {
+
+      "config/*": [
+        "./src/config/*"
+      ],
+      "controller/*": [
+        "./src/controller/*"
+      ],
+      "middleware/*": [
+        "./src/middleware/*"
+      ],
+      "route/*": [
+        "./src/route/*"
+      ],
+      "service/*": [
+        "./src/service/*"
+      ],
+      "validation/*": [
+        "./src/validation/*"
+      ],
+      "types/*": [
+        "./src/types/*"
+      ]
+
+    }
   }
 }
