@@ -233,7 +233,7 @@
         }
     });
 
- //handle filter products
+    //handle filter products
     $('#btnFilter').click(function (event) {
         event.preventDefault();
 
@@ -269,7 +269,7 @@
         //reset
         searchParams.delete('factory');
         searchParams.delete('target');
-        searchParams.delete('price'); 
+        searchParams.delete('price');
 
         if (factoryArr.length > 0) {
             searchParams.set('factory', factoryArr.join(','));
@@ -321,7 +321,103 @@
         $(`input[type="radio"][name="radio-sort"][value="${sort}"]`).prop('checked', true);
     }
 
+    $('.btnAddToCartHomePage').click(function (event) {
+        event.preventDefault();
+        const productId = $(this).attr('data-product-id');
+        if (!isLoggedIn()) {
+            $.toast({
+                heading: 'Error',
+                text: 'You need to log in to add products to the cart.',
+                icon: 'error',
+                position: 'top-right'
+            });
+            return;
+        }
+        $.ajax({
+            url: `${window.location.origin}/api/add-product-to-cart`,
+            method: 'POST',
+            data: JSON.stringify({ quantity: 1, productId: productId }),
+            contentType: "application/json",
+            success: function (response) {
+                const sum= +response.data;
+                    $("#sumCart").text(sum);
+                
+                    $.toast({
+                        heading: 'Success',
+                        text: 'Product added to cart successfully.',
+                        icon: 'success',
+                        position: 'top-right'
+                    });
+                
+                
+            },
+            error: function () {
+                $.toast({
+                    heading: 'Error',
+                    text: 'An error occurred while adding the product to the cart.',
+                    icon: 'error',
+                    position: 'top-right'
+                });
+            }
+        });
+        
+    });
 
 
+
+
+
+    $('.btnAddToCartDetail').click(function (event) {
+        event.preventDefault();
+        const productId = $(this).attr('data-product-id');
+        if (!isLoggedIn()) {
+            $.toast({
+                heading: 'Error',
+                text: 'You need to log in to add products to the cart.',
+                icon: 'error',
+                position: 'top-right'
+            });
+            return;
+        }
+
+        const quantity = $('#quantityDetail').val();
+        $.ajax({
+            url: `${window.location.origin}/api/add-product-to-cart`,
+            method: 'POST',
+            data: JSON.stringify({ quantity: quantity, productId: productId }),
+            contentType: "application/json",
+            success: function (response) {
+                const sum= +response.data;
+                    $("#sumCart").text(sum);
+                
+                    $.toast({
+                        heading: 'Success',
+                        text: 'Product added to cart successfully.',
+                        icon: 'success',
+                        position: 'top-right'
+                    });
+                
+                
+            },
+            error: function () {
+                $.toast({
+                    heading: 'Error',
+                    text: 'An error occurred while adding the product to the cart.',
+                    icon: 'error',
+                    position: 'top-right'
+                });
+            }
+        });
+    });
+
+    function isLoggedIn() {
+        const navElement = $("#navbarCollapse");
+        const userData = navElement.find('a-login');
+       if (userData.length > 0) {
+        return false;
+       }
+       return true;
+
+    }
 
 })(jQuery);

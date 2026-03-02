@@ -203,8 +203,9 @@
                                                             currency: 'JPY' }).format(product.price) %>
                                                     </p>
                                                     <form method="post" action="/add-product-to-cart/<%= product.id %>">
-                                                        <button
-                                                            class="mx-auto btn border border-secondary rounded-pill px-3 text-primary">
+                                                        <button 
+                                                            data-product-id="<%= product.id %>"
+                                                            class="btnAddToCatHomePage mx-auto btn border border-secondary rounded-pill px-3 text-primary">
                                                             <i class="fa fa-shopping-bag me-2 text-primary"></i>
                                                             Add to cart
                                                         </button>

@@ -19,6 +19,7 @@ const port = process.env.PORT || 3000;
 // しかしファイル拡張子が .js で CommonJS(require) を使っているため、
 // Node.js では通常使えません。
 // → TypeScript または "type":"module" の環境を前提にする必要がある。
+import apiRouter from 'route/api';
 import webRoute from 'route/web';
 import passport from "passport";
 import ConfigPassportLocal from 'middleware/passport.local';
@@ -71,6 +72,7 @@ app.use((req, res, next) => {
 // ルーティングを設定（web.js 内で app.get などを設定する想定）
 webRoute(app);
 
+apiRouter(app);
 // 静的ファイル（画像・CSS・JS）を提供する設定
 // "./src/public"フォルダ内のファイルをURLから直接アクセス可能にする
 

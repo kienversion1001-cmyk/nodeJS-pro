@@ -117,8 +117,8 @@
 
                                 <form action="/add-to-cart-from-detail-page/<%= product.id %>" method="post">
                                     <input value="1" id="quantityDetail" name="quantity" style="display: none;">
-                                    <button type="submit"
-                                        class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
+                                    <button data-product-id="<%= product.id %>" type="submit"
+                                        class="btnAddToCartDetail btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
                                             class="fa fa-shopping-bag me-2 text-primary"></i> Buy Now
 
 

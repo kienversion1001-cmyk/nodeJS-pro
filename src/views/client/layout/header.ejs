@@ -58,7 +58,9 @@
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <span
                             class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;"><%= user?.sumCart ?? 0%></span>
+                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;" id="sumCart">
+                            <%= user?.sumCart ?? 0%>
+                        </span>
                     </a>
                     <div class="dropdown my-auto">
                         <a href="#" class="dropdown" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -67,25 +69,33 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-end p-4" aria-labelledby="dropdownMenuLink">
-                            <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
-                                <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
-                                    src="/images/ <%=user?.avatar??""%>" />
-                                <div class="text-center my-3">
-                                    <%=user?.fullName??""%>
-                                </div>
-                            </li>
+                            <% if (user) { %>
+                                <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
+                                    <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
+                                        src="/images/ <%=user?.avatar??""%>" />
+                                    <div class="text-center my-3">
+                                        <%=user?.fullName??""%>
+                                    </div>
+                                </li>
 
-                            <li><a class="dropdown-item" href="#">アカウント管理</a></li>
+                                <li><a class="dropdown-item" href="#">アカウント管理</a></li>
 
-                            <li><a class="dropdown-item" href="/order-history">購入履歴</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <form method="post" action="/logout">
-                                    <button class="dropdown-item">ログアウト</button>
-                                </form>
-                            </li>
+                                <li><a class="dropdown-item" href="/order-history">購入履歴</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form method="post" action="/logout">
+                                        <button class="dropdown-item">ログアウト</button>
+                                    </form>
+                                </li>
+                                <% } else { %>
+                                    <li>
+                                        <a class="dropdown-item a-login" href="/login">
+                                            <i class="fas fa-sign-in-alt me-2"></i>ログイン
+                                        </a>
+                                    </li>
+                                    <% } %>
                         </ul>
                     </div>
 
