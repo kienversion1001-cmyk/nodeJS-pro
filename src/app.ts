@@ -51,7 +51,7 @@ app.use(session({
   // cookie: { secure: true }
 }));
 
-
+//confic static files
 app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.authenticate('session'));

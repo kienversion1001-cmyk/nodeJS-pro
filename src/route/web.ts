@@ -35,7 +35,7 @@ const router = express.Router();
  */
 const webRoute = (app: Express) => {
 
-  router.get("/", getHomePage);
+router.get("/", getHomePage);
 
   // router.get('/create-user', getCreateUserPage);
 router.get ("/products",getProductFilteredPage);
