@@ -1,24 +1,19 @@
 
 /// <reference path="types/index.d.ts" />
-// .envファイルの内容を process.env に読み込む
+
 require('dotenv').config()
 import { initDatabase } from './config/seed';
-// Express本体を読み込み
+
 const express = require('express');
 const app = express();
 import { Request, Response } from "express";
-// pathモジュール（ファイルパスを扱うため）
+
 const path = require('path')
 
-// import { getConnection } from './config/database';
-// .envにPORTがあれば使用し、なければ3000番
+
 const port = process.env.PORT || 3000;
 
-// ★注意★
-// 下記は ES Modules（import）構文。
-// しかしファイル拡張子が .js で CommonJS(require) を使っているため、
-// Node.js では通常使えません。
-// → TypeScript または "type":"module" の環境を前提にする必要がある。
+
 import apiRouter from 'route/api';
 import webRoute from 'route/web';
 import passport from "passport";
@@ -73,8 +68,7 @@ app.use((req, res, next) => {
 webRoute(app);
 
 apiRouter(app);
-// 静的ファイル（画像・CSS・JS）を提供する設定
-// "./src/public"フォルダ内のファイルをURLから直接アクセス可能にする
+
 
 
 initDatabase();

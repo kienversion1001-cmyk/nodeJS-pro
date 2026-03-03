@@ -1,5 +1,5 @@
 import e, { Request, Response } from 'express';
-import { handerGetAllUsers } from 'service/client/api.service';
+import { handerGetAllUsers, handerGetUserById } from 'service/client/api.service';
 import { addProductToCart } from 'service/client/item.service';
 
 
@@ -18,11 +18,18 @@ const postAddProductToCartAPI =async (req: Request, res: Response) => {
 }
 
 const getAllUseAPI =async (req: Request, res: Response) => {
-    const user = await handerGetAllUsers(req, res); // ユーザーIDを取得（認証が必要な場合）
+    const user = await handerGetAllUsers(); // ユーザーIDを取得（認証が必要な場合）
+    
+    return res.status(200).json({ data:  user });
+
+}
+const getUseByIdAPI =async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const user = await handerGetUserById(+id); // ユーザーIDを取得（認証が必要な場合）
     
     return res.status(200).json({ data:  user });
 
 }
 
-export { postAddProductToCartAPI, getAllUseAPI };
+export { postAddProductToCartAPI, getAllUseAPI ,getUseByIdAPI};
 
