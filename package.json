@@ -18,12 +18,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon",
     "dev": "nodemon",
-    "start:debug": "nodemon --inspect=9229 -e ts,tsx --exec node -r ts-node/register -r tsconfig-paths/register ./src/app.ts"
+    "start:debug": "nodemon --inspect=9230 -e ts,tsx --exec node -r ts-node/register -r tsconfig-paths/register ./src/app.ts"
   },
   "dependencies": {
     "@prisma/client": "6.3.0",
     "@quixo3/prisma-session-store": "3.1.13",
     "bcrypt": "5.1.1",
+    "cors": "2.8.5",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "5.0.2",
+    "@types/cors": "2.8.17",
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.5",
     "@types/express-session": "1.18.1",

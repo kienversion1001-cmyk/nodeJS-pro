@@ -15,8 +15,6 @@ const isLogin = (req: Request, res: Response, next: NextFunction) => {
 
 }
 
-
-
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
 
     if (req.path.startsWith('/admin')) {

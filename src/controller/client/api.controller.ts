@@ -1,5 +1,5 @@
 import e, { Request, Response } from 'express';
-import { handerDeleteUserById, handerGetAllUsers, handerGetUserById, handerUpdateUserById } from 'service/client/api.service';
+import { handerDeleteUserById, handerGetAllUsers, handerGetUserById, handerUpdateUserById, handlerUserLogin } from 'service/client/api.service';
 import { registerNewUser } from 'service/client/auth.service';
 import { addProductToCart } from 'service/client/item.service';
 import { registerSchema, TRegisterSchema } from 'validation/register.schema';
@@ -93,8 +93,30 @@ const deleteUseByIdAPI = async (req: Request, res: Response) => {
     });
 
 }
+const loginAPI = async (req: Request, res: Response) => {
+    
+    const { username, password } = req.body;
+    
+        try {
+          const asscessToken = await handlerUserLogin(username, password);
+          return res.status(200).json({
+            data: asscessToken
+          });
+        } catch (error) {
+            return res.status(401).json({
+                data: error instanceof Error ? error.message : "Login failed"
+            });
+        }
+    
+
+}
+
+const fetchAccountAPI = async (req: Request, res: Response) => {
+    const user = req.user;
+    return res.status(200).json({ data: user });
+}
 
 export { postAddProductToCartAPI, getAllUseAPI, getUseByIdAPI, createUserAPI, updateUseByIdAPI
-    ,deleteUseByIdAPI
+    ,deleteUseByIdAPI,loginAPI,fetchAccountAPI
  };
 

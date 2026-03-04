@@ -19,6 +19,9 @@ import webRoute from 'route/web';
 import passport from "passport";
 import ConfigPassportLocal from 'middleware/passport.local';
 import session from 'express-session';
+
+import cors from "cors";
+
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const { PrismaClient } = require('@prisma/client');
 // EJS をテンプレートエンジンとして設定
@@ -69,7 +72,7 @@ webRoute(app);
 
 apiRouter(app);
 
-
+app.use(cors())
 
 initDatabase();
 
